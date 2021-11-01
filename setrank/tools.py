@@ -25,7 +25,8 @@ def P(ranks, E):
 def rFF(B):
     kinds = B.shape[0]
     B = B.flatten()
-    return MLP(B.shape[0], kinds)
+    model = MLP(B.shape[0], kinds)
+    return model(B)
 
 
 def Attn(Q, K, V):
