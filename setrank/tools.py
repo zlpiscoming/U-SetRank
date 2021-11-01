@@ -45,9 +45,9 @@ def Attn(Q, K, V):
 def Multihead(Q, K, V, h=1):
     Res = torch.ones([Q.shape[0],0])
     for i in range(h):
-        _Q = Q[:, i:i + 1]
-        _K = K[:, i:i + 1]
-        _V = V[:, i:i + 1]
+        _Q = Q[:, i:i + Q.shape[1]/h]
+        _K = K[:, i:i + K.shape[1]/h]
+        _V = V[:, i:i + V.shape[1]/h]
         Res = torch.cat([Res, Attn(_Q, _K, _V)])
     return Res
 
