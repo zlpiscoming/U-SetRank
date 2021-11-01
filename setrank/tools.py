@@ -30,13 +30,8 @@ def rFF(B):
 
 def Attn(Q, K, V):
     E  = Q.shape[1]
-    K = K.T
-    print('Q', Q.shape)
-    print('K', K.shape)
-    print('V', V.shape)
+    K = K.T 
     tmp = nn.Softmax(Q*K/np.sqrt(E)).dim
-    print('tmp', tmp.shape)
-    print('V', V.shape)
     Res = tmp*V
     '''
         Q = Nq * E
