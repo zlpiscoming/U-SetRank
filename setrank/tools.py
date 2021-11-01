@@ -57,7 +57,7 @@ def layerNormalization(x):
 
 def generateRanks(datas):
     x, indices = torch.sort(datas, descending=True)
-    return indices
+    return indices+1
 
 def MAB(Q, K, V):
     B = layerNormalization(Q + Multihead(Q,K,V))
