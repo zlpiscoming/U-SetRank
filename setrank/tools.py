@@ -25,14 +25,18 @@ def P(ranks, E):
 def rFF(B):
     kinds = B.shape[0]
     B = B.flatten()
-    model = MLP(B.shape[0], kinds)
-    return model(B)
+    return MLP(B.shape[0], kinds)
 
 
 def Attn(Q, K, V):
     E  = Q.shape[1]
-    K = K.T 
+    K = K.T
+    print('Q', Q.shape)
+    print('K', K.shape)
+    print('V', V.shape)
     tmp = nn.Softmax(Q*K/np.sqrt(E)).dim
+    print('tmp', tmp.shape)
+    print('V', V.shape)
     Res = tmp*V
     '''
         Q = Nq * E
@@ -45,9 +49,9 @@ def Attn(Q, K, V):
 def Multihead(Q, K, V, h=1):
     Res = torch.ones([Q.shape[0],0])
     for i in range(h):
-        _Q = Q[:, i:i + Q.shape[1]/h]
-        _K = K[:, i:i + K.shape[1]/h]
-        _V = V[:, i:i + V.shape[1]/h]
+        _Q = Q[:, i:i + 1]
+        _K = K[:, i:i + 1]
+        _V = V[:, i:i + 1]
         Res = torch.cat([Res, Attn(_Q, _K, _V)])
     return Res
 
@@ -57,7 +61,7 @@ def layerNormalization(x):
 
 def generateRanks(datas):
     x, indices = torch.sort(datas, descending=True)
-    return indices+1
+    return indices
 
 def MAB(Q, K, V):
     B = layerNormalization(Q + Multihead(Q,K,V))
@@ -75,3 +79,10 @@ def IMSAB(Q, m):
     H = MAB(I,Q,Q)
     return MAB(Q,H,H)
 
+def gernerateLoss(ranks, targets):
+    sum1 = torch.sum(torch.exp(ranks))
+    sum2 = torch.sum(torch.exp(targets))
+    ranks = ranks / sum1
+    targets = targets / sum2
+    CrossEntropyLoss = nn.CrossEntropyLoss()
+    return CrossEntropyLoss(ranks, targets)
