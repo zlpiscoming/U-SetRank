@@ -7,7 +7,7 @@
 ## Usage
 
 ### Environmental preparation
-> you should first download galago and prepare it to \SetRank-master\scripts.
+> you should first download galago and put it in \scripts.
 
 > tf 1.0 and tensorboardX are also used
 
