@@ -9,7 +9,7 @@
 ### Quick Start
 > If you have downloaded **Istella Dataset** please comment `sh download_data.sh`.
 ```bash
-sh run.sh
+sh test.sh
 ```
 ### Data Preparation
 ```bash
