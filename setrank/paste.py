@@ -1,3 +1,0 @@
-'''
-Code from other people
-'''
