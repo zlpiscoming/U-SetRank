@@ -8,6 +8,7 @@
 
 ### Environmental preparation
 > you should first download galago and prepare it.
+
 > tf 1.0 and tensorboardX are also used
 
 
