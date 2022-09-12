@@ -6,6 +6,11 @@
 
 ## Usage
 
+### Environmental preparation
+> you should first download galago and prepare it.
+> tf 1.0 and tensorboardX are also used
+
+
 ### Quick Start
 > If you have downloaded **Istella Dataset** please comment `sh download_data.sh`.
 ```bash
